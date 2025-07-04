@@ -100,12 +100,29 @@ class ProductDetailViewController: UIViewController {
         return button
     }()
 
+    private let specsScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+
+    private let specsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        return stackView
+    }()
+
     private let pointsLabel: PaddedLabel = {
         let label = PaddedLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .n11Purple
-        label.text = "Bu üründen 30 UçUç Puan kazanabilirsin."
+        label.text = "Bu üründen 30 UçUç Puan kazanabilirsin!"
         label.backgroundColor = UIColor.n11LightPurple.withAlphaComponent(0.1)
         label.layer.cornerRadius = 8
         label.layer.masksToBounds = true
@@ -144,7 +161,7 @@ class ProductDetailViewController: UIViewController {
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return label
     }()
-
+    
     private let officialStoreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -163,10 +180,47 @@ class ProductDetailViewController: UIViewController {
         return label
     }()
 
-    private let priceLabel: UILabel = {
+    private let bottomBarView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 0, height: -2)
+        view.layer.shadowRadius = 4
+        return view
+    }()
+
+    private let priceDetailsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 2
+        stackView.alignment = .leading
+        return stackView
+    }()
+
+    private let originalPriceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .lightGray
+        return label
+    }()
+
+    private let sepetteLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .n11Purple
+        label.text = "Sepette"
+        return label
+    }()
+
+    private let discountedPriceLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         return label
     }()
@@ -178,7 +232,7 @@ class ProductDetailViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = UIColor.n11Purple
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 8
         return button
     }()
 
@@ -227,11 +281,13 @@ class ProductDetailViewController: UIViewController {
         contentView.addSubview(productNameLabel)
         contentView.addSubview(ratingStackView)
         contentView.addSubview(heartButton)
+
+        contentView.addSubview(specsScrollView)
+        specsScrollView.addSubview(specsStackView)
+
         contentView.addSubview(pointsLabel)
         contentView.addSubview(sellerInfoView)
         contentView.addSubview(freeShippingLabel)
-        contentView.addSubview(priceLabel)
-        contentView.addSubview(addToCartButton)
 
         ratingStackView.addArrangedSubview(starsStackView)
         ratingStackView.addArrangedSubview(ratingLabel)
@@ -240,6 +296,13 @@ class ProductDetailViewController: UIViewController {
         sellerInfoView.addSubview(sellerNameLabel)
         sellerInfoView.addSubview(sellerBadgeLabel)
         sellerInfoView.addSubview(officialStoreLabel)
+
+        view.addSubview(bottomBarView)
+        bottomBarView.addSubview(priceDetailsStackView)
+        priceDetailsStackView.addArrangedSubview(originalPriceLabel)
+        priceDetailsStackView.addArrangedSubview(sepetteLabel)
+        priceDetailsStackView.addArrangedSubview(discountedPriceLabel)
+        bottomBarView.addSubview(addToCartButton)
 
         setupStarRatingViews()
 
@@ -252,7 +315,7 @@ class ProductDetailViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomBarView.topAnchor),
 
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -287,11 +350,21 @@ class ProductDetailViewController: UIViewController {
             ratingStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             ratingStackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -16),
 
-            pointsLabel.topAnchor.constraint(equalTo: ratingStackView.bottomAnchor, constant: 16),
+            specsScrollView.topAnchor.constraint(equalTo: ratingStackView.bottomAnchor, constant: 16),
+            specsScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            specsScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            specsScrollView.heightAnchor.constraint(equalToConstant: 55),
+
+            specsStackView.topAnchor.constraint(equalTo: specsScrollView.topAnchor),
+            specsStackView.bottomAnchor.constraint(equalTo: specsScrollView.bottomAnchor),
+            specsStackView.leadingAnchor.constraint(equalTo: specsScrollView.leadingAnchor, constant: 16),
+            specsStackView.trailingAnchor.constraint(equalTo: specsScrollView.trailingAnchor, constant: -16),
+            specsStackView.heightAnchor.constraint(equalTo: specsScrollView.heightAnchor),
+
+            pointsLabel.topAnchor.constraint(equalTo: specsScrollView.bottomAnchor, constant: 16),
             pointsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             pointsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             pointsLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
-            pointsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 
             sellerInfoView.topAnchor.constraint(equalTo: pointsLabel.bottomAnchor, constant: 16),
             sellerInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -300,24 +373,29 @@ class ProductDetailViewController: UIViewController {
 
             sellerNameLabel.leadingAnchor.constraint(equalTo: sellerInfoView.leadingAnchor, constant: 16),
             sellerNameLabel.topAnchor.constraint(equalTo: sellerInfoView.topAnchor, constant: 12),
-
             sellerBadgeLabel.leadingAnchor.constraint(equalTo: sellerNameLabel.trailingAnchor, constant: 8),
             sellerBadgeLabel.centerYAnchor.constraint(equalTo: sellerNameLabel.centerYAnchor),
-
             officialStoreLabel.leadingAnchor.constraint(equalTo: sellerInfoView.leadingAnchor, constant: 16),
             officialStoreLabel.topAnchor.constraint(equalTo: sellerNameLabel.bottomAnchor, constant: 4),
 
             freeShippingLabel.topAnchor.constraint(equalTo: sellerInfoView.bottomAnchor, constant: 16),
             freeShippingLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
 
-            priceLabel.topAnchor.constraint(equalTo: freeShippingLabel.bottomAnchor, constant: 16),
-            priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            freeShippingLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
 
-            addToCartButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 24),
-            addToCartButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            addToCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            bottomBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomBarView.heightAnchor.constraint(equalToConstant: 70),
+
+            priceDetailsStackView.leadingAnchor.constraint(equalTo: bottomBarView.leadingAnchor, constant: 16),
+            priceDetailsStackView.centerYAnchor.constraint(equalTo: bottomBarView.centerYAnchor),
+            priceDetailsStackView.trailingAnchor.constraint(lessThanOrEqualTo: addToCartButton.leadingAnchor, constant: -16),
+
+            addToCartButton.trailingAnchor.constraint(equalTo: bottomBarView.trailingAnchor, constant: -16),
+            addToCartButton.centerYAnchor.constraint(equalTo: bottomBarView.centerYAnchor),
+            addToCartButton.widthAnchor.constraint(equalToConstant: 150),
             addToCartButton.heightAnchor.constraint(equalToConstant: 48),
-            addToCartButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
     }
 
@@ -329,7 +407,6 @@ class ProductDetailViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-
 
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
@@ -360,6 +437,40 @@ class ProductDetailViewController: UIViewController {
         }
     }
 
+    private func createSpecBadgeView(text: String) -> UIView {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+        containerView.layer.cornerRadius = 8
+        containerView.layer.masksToBounds = true
+        containerView.setContentHuggingPriority(.required, for: .horizontal)
+        containerView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        containerView.setContentCompressionResistancePriority(.required, for: .vertical)
+        containerView.setContentHuggingPriority(.required, for: .vertical)
+        containerView.widthAnchor.constraint(greaterThanOrEqualToConstant: 120).isActive = true
+        containerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+
+
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .black
+        label.text = text
+        label.textAlignment = .center
+        label.numberOfLines = 1
+
+        containerView.addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4),
+            label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4),
+        ])
+
+        return containerView
+    }
+
     private func updateUI() {
         guard let product = product else {
             print("Product data not available.")
@@ -368,8 +479,29 @@ class ProductDetailViewController: UIViewController {
 
         productNameLabel.text = product.title
         ratingLabel.text = product.ratingText
-        reviewCountLabel.text = product.reviewCountText
-        priceLabel.text = product.formattedPrice
+        reviewCountLabel.text = product.reviewCountText + " 📸"
+
+        discountedPriceLabel.text = product.formattedPrice
+
+        if let originalPrice = product.originalPrice,
+           let currentPrice = product.price,
+           originalPrice > currentPrice
+        {
+            let formattedOriginalPriceString = String(format: "%.0f TL", originalPrice)
+            let attributeString = NSAttributedString(
+                string: formattedOriginalPriceString,
+                attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
+            )
+            originalPriceLabel.attributedText = attributeString
+            originalPriceLabel.isHidden = false
+
+            sepetteLabel.isHidden = !(product.hasSepettePrice == true)
+
+        } else {
+            originalPriceLabel.attributedText = nil
+            originalPriceLabel.isHidden = true
+            sepetteLabel.isHidden = true
+        }
 
         updateStarRating(with: product.rating)
 
@@ -378,6 +510,17 @@ class ProductDetailViewController: UIViewController {
         sellerNameLabel.text = product.seller ?? "Satıcı Bilgisi Yok"
 
         freeShippingLabel.isHidden = !(product.isFreeShipping == true)
+
+        specsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        let specTitles = ["Marka: Xiaomi", "Distribütör Garantili", "Ekran Boyutu 11.2\"", "Batarya Kapasitesi 8850 mAh", "Ön Kamera Çözünürlüğü 12 MP", "Şarj Tipi: USB-C", "Çözünürlük: 2560x1600"]
+
+        for spec in specTitles {
+            let badgeView = createSpecBadgeView(text: spec)
+            specsStackView.addArrangedSubview(badgeView)
+        }
+
+        specsScrollView.isHidden = specsStackView.arrangedSubviews.isEmpty
     }
 
     private func updateStarRating(with rating: Double?) {
@@ -410,7 +553,7 @@ class ProductDetailViewController: UIViewController {
             placeholderImageView.backgroundColor = .white
             placeholderImageView.image = UIImage(named: "placeHolder")
             placeholderImageView.tintColor = .systemGray3
-            
+
             imageStackView.addArrangedSubview(placeholderImageView)
 
             let placeholderConstraints = [
@@ -441,13 +584,14 @@ class ProductDetailViewController: UIViewController {
                 imageView.kf.setImage(with: url, placeholder: UIImage(named: "placeHolder"))
             } else {
                 imageView.image = UIImage(named: "placeHolder")
-                imageView.tintColor = .systemRed
+                imageView.tintColor = .n11Purple
             }
         }
 
         pageControl.numberOfPages = urls.count
         pageControl.currentPage = 0
     }
+
     private func checkIfFavorite() {
         guard let product = product else { return }
 
@@ -457,7 +601,7 @@ class ProductDetailViewController: UIViewController {
                 case .success(let favoriteIds):
                     let isFavorite = favoriteIds.contains(product.id)
                     self?.heartButton.isSelected = isFavorite
-                    self?.heartButton.tintColor = isFavorite ? .red : .systemGray
+                    self?.heartButton.tintColor = isFavorite ? .n11Purple : .systemGray
                 case .failure(let error):
                     print("Error checking favorites: \(error)")
                     self?.heartButton.isSelected = false
@@ -495,7 +639,7 @@ class ProductDetailViewController: UIViewController {
                         self?.present(alert, animated: true)
                     } else {
                         self?.heartButton.isSelected = true
-                        self?.heartButton.tintColor = .red
+                        self?.heartButton.tintColor = .n11Purple
                         self?.animateHeartButton()
                     }
                 }
