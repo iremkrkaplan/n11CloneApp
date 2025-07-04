@@ -135,7 +135,7 @@ class FirebaseManager: ObservableObject {
                  print("DEBUG: FirebaseManager - Favoriler başarıyla alındı (\(items.count) ürün).")
                 completion(.success(items))
             } else {
-                 print("DEBUG: FirebaseManager - Favoriler bulunamadı veya boş.") // Debug çıktısı
+                 print("DEBUG: FirebaseManager - Favoriler bulunamadı veya boş.")
                 completion(.success([]))
             }
         }

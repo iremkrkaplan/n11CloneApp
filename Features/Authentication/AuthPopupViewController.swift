@@ -409,7 +409,7 @@ class AuthPopupViewController: UIViewController {
             mainActionButton.topAnchor.constraint(equalTo: formFieldsStackView.bottomAnchor, constant: Padding.standard),
             mainActionButton.leadingAnchor.constraint(equalTo: scrollViewContainerView.leadingAnchor, constant: Padding.standard),
             mainActionButton.trailingAnchor.constraint(equalTo: scrollViewContainerView.trailingAnchor, constant: -Padding.standard),
-            mainActionButton.heightAnchor.constraint(equalToConstant: 50), // Sabit yükseklik
+            mainActionButton.heightAnchor.constraint(equalToConstant: 50),
 
             otherOptionsLabel.topAnchor.constraint(equalTo: mainActionButton.bottomAnchor, constant: Padding.large),
             otherOptionsLabel.centerXAnchor.constraint(equalTo: scrollViewContainerView.centerXAnchor),
@@ -436,7 +436,6 @@ class AuthPopupViewController: UIViewController {
           print("DEBUG: AuthPopupViewController Buton action'ları bağlandı.")
      }
 
-    // Popup'ı kapatma aksiyonu.
     @objc private func dismissPopup() {
         view.endEditing(true)
         dismiss(animated: true, completion: nil)
@@ -666,7 +665,7 @@ class AuthPopupViewController: UIViewController {
          if notification.name == UIResponder.keyboardWillHideNotification {
              scrollView.contentInset = .zero
              scrollView.scrollIndicatorInsets = .zero
-             print("DEBUG: AuthPopupViewController Klavye gizleniyor, scrollView insets sıfırlandı.") // Debug çıktısı
+             print("DEBUG: AuthPopupViewController Klavye gizleniyor, scrollView insets sıfırlandı.")
          } else {
              let keyboardHeight = keyboardViewEndFrame.size.height
 
@@ -737,7 +736,7 @@ class AuthPopupViewController: UIViewController {
 
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = title // Metin
+        titleLabel.text = title
         titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         titleLabel.textColor = Colors.darkGrayText
         titleLabel.textAlignment = .center

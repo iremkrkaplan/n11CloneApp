@@ -12,24 +12,18 @@ import Kingfisher
 
 class HomeViewController: UIViewController {
 
-    // MARK: - Properties
-    
-    // Erişilebilirlik için 'private' kaldırıldı.
     var sponsoredProducts: [Product] = []
     var normalProducts: [Product] = []
     
     private var favoriteProductIDs = Set<String>()
     
-    // API ve Favori yöneticileri
     private let apiService = APIService.shared
     private let favoritesManager = FavoritesManager.shared
-    
-    // MARK: - UI Elements
+
     private var headerView: HomeHeaderView!
     private var collectionView: UICollectionView!
     private var sponsoredSectionPageControl: UIPageControl?
     
-    // Veri yüklenirken gösterilecek aktivite göstergesi
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.color = .systemGray
@@ -38,14 +32,12 @@ class HomeViewController: UIViewController {
         return indicator
     }()
 
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         addFavoritesObserver()
         
-        // Kullanıcı girişi ve veri çekme işlemini başlat
         authenticateAndFetchData()
     }
     
@@ -53,7 +45,6 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: - Setup
     private func setupUI() {
         view.backgroundColor = .n11LightGray
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -67,9 +58,7 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.alpha = 0 // Başlangıçta gizli, veri gelince görünecek
-        
-        // Hücreleri ve header/footer'ı kaydet
+        collectionView.alpha = 0
         collectionView.register(SponsoredProductCell.self, forCellWithReuseIdentifier: SponsoredProductCell.identifier)
         collectionView.register(NormalProductCell.self, forCellWithReuseIdentifier: NormalProductCell.identifier)
         collectionView.register(SponsoredProductsHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SponsoredProductsHeaderView.identifier)

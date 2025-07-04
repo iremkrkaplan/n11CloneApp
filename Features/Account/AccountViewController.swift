@@ -181,7 +181,7 @@ class AccountViewController: UIViewController {
          iconImageView.contentMode = .scaleAspectFit
 
          if iconImageView.image?.renderingMode == .alwaysTemplate {
-              iconImageView.tintColor = Colors.darkGrayIcon // Koyu gri renk
+              iconImageView.tintColor = Colors.darkGrayIcon
          }
 
          let titleLabel = UILabel()

@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController {
     
     private func setupTabBar() {
         tabBar.backgroundColor = UIColor.white
-        tabBar.tintColor = UIColor.systemPurple
+        tabBar.tintColor = UIColor.n11Purple
         tabBar.unselectedItemTintColor = UIColor.black
         tabBar.isTranslucent = false
         
@@ -95,9 +95,9 @@ class MainTabBarController: UITabBarController {
                 .font: UIFont.systemFont(ofSize: 10, weight: .medium)
             ]
 
-            appearance.stackedLayoutAppearance.selected.iconColor = UIColor.systemPurple
+            appearance.stackedLayoutAppearance.selected.iconColor = UIColor.n11Purple
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
-                .foregroundColor: UIColor.systemPurple,
+                .foregroundColor: UIColor.n11Purple,
                 .font: UIFont.systemFont(ofSize: 10, weight: .semibold)
             ]
             
@@ -105,7 +105,7 @@ class MainTabBarController: UITabBarController {
             tabBar.scrollEdgeAppearance = appearance
         } else {
             tabBar.backgroundColor = UIColor.white
-            tabBar.tintColor = UIColor.systemPurple
+            tabBar.tintColor = UIColor.n11Purple
             tabBar.unselectedItemTintColor = UIColor.black
         }
     }

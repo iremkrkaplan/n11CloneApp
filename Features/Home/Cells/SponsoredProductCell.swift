@@ -175,7 +175,7 @@ class SponsoredProductCell: UICollectionViewCell {
     func configure(with product: Product) {
         titleLabel.text = product.title
         
-        if let urlString = product.imageUrl, let url = URL(string: urlString) {
+        if let urlString = product.primaryImageURL, let url = URL(string: urlString) {
             imageView.kf.setImage(with: url)
         }
         

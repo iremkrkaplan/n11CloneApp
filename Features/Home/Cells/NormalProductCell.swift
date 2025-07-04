@@ -263,7 +263,7 @@ class NormalProductCell: UICollectionViewCell {
         favoriteButton.setImage(heartImage, for: .normal)
         favoriteButton.tintColor = heartColor
 
-        if let urlString = product.imageUrl, let url = URL(string: urlString) {
+        if let urlString = product.primaryImageURL, let url = URL(string: urlString) {
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo"))
         } else {

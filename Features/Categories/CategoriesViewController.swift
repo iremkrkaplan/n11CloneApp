@@ -64,7 +64,7 @@ class CategoriesViewController: UIViewController {
                 glassIconView.tintColor = UIColor(red: 0.5, green: 0.1, blue: 0.9, alpha: 1.0)
             }
         }
-        sb.tintColor = UIColor(red: 0.5, green: 0.1, blue: 0.9, alpha: 1.0) // Cursor rengi
+        sb.tintColor = UIColor(red: 0.5, green: 0.1, blue: 0.9, alpha: 1.0)
         
         return sb
     }()
@@ -144,7 +144,6 @@ class CategoriesViewController: UIViewController {
         set { }
     }
 
-    // MARK: - UI Kurulumu
     private func setupUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = .white
@@ -171,7 +170,7 @@ class CategoriesViewController: UIViewController {
             headerContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerContainerView.heightAnchor.constraint(equalToConstant: 60), // Yüksekliği ayarla
+            headerContainerView.heightAnchor.constraint(equalToConstant: 60),
 
             n11LogoImageView.leadingAnchor.constraint(equalTo: headerContainerView.leadingAnchor, constant: 16),
             n11LogoImageView.centerYAnchor.constraint(equalTo: headerContainerView.centerYAnchor),
@@ -180,14 +179,13 @@ class CategoriesViewController: UIViewController {
 
             bellContainerView.trailingAnchor.constraint(equalTo: headerContainerView.trailingAnchor, constant: -16),
             bellContainerView.centerYAnchor.constraint(equalTo: headerContainerView.centerYAnchor),
-            bellContainerView.widthAnchor.constraint(equalToConstant: 40), // Daha küçük bir alan için 40 yaptık
-            bellContainerView.heightAnchor.constraint(equalToConstant: 40), // Daha küçük bir alan için 40 yaptık
+            bellContainerView.widthAnchor.constraint(equalToConstant: 40),
+            bellContainerView.heightAnchor.constraint(equalToConstant: 40),
 
-            searchBar.leadingAnchor.constraint(equalTo: n11LogoImageView.trailingAnchor, constant: 8), // Logo'dan sonra
-            searchBar.trailingAnchor.constraint(equalTo: bellContainerView.leadingAnchor, constant: -8), // Zil'den önce
+            searchBar.leadingAnchor.constraint(equalTo: n11LogoImageView.trailingAnchor, constant: 8),
+            searchBar.trailingAnchor.constraint(equalTo: bellContainerView.leadingAnchor, constant: -8),
             searchBar.centerYAnchor.constraint(equalTo: headerContainerView.centerYAnchor),
-            searchBar.heightAnchor.constraint(equalToConstant: 40), // Telefonun boy kısmına göre daha dar (40 yaptık)
-
+            searchBar.heightAnchor.constraint(equalToConstant: 40),
             categoriesTitleLabel.topAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: 15),
             categoriesTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             categoriesTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -226,8 +224,8 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
         let availableWidth = collectionView.frame.width - totalHorizontalPadding - totalSpacing
         let itemWidth = availableWidth / itemsPerRow
         
-        let itemHeight: CGFloat = itemWidth * 1.05 // Oranı koruyarak biraz esneme payı
-
+        let itemHeight: CGFloat = itemWidth * 1.05
+        
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }

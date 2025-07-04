@@ -138,7 +138,7 @@ class FavoriteProductCell: UICollectionViewCell {
     func configure(with product: Product) {
         titleLabel.text = product.title
         
-        if let urlString = product.imageUrl, let url = URL(string: urlString) {
+        if let urlString = product.primaryImageURL, let url = URL(string: urlString) {
             productImageView.kf.indicatorType = .activity
             productImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo"))
         } else {

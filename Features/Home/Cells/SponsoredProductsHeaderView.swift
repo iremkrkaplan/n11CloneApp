@@ -4,8 +4,6 @@
 //
 //  Created by irem karakaplan on 3.07.2025.
 //
-// Features/Home/Cells/SponsoredProductsHeaderView.swift
-// Features/Home/Cells/SponsoredProductsHeaderView.swift
 
 import UIKit
 

@@ -167,8 +167,7 @@ class AuthViewController: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)
         let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
         sender.setImage(UIImage(systemName: imageName, withConfiguration: config), for: .normal)
-        sender.tintColor = passwordTextField.isSecureTextEntry ? .systemGray : .systemBlue // Renk de değişebilir (isteğe bağlı)
-
+        sender.tintColor = passwordTextField.isSecureTextEntry ? .systemGray : .systemBlue
         if let textRange = passwordTextField.textRange(from: passwordTextField.beginningOfDocument, to: passwordTextField.endOfDocument) {
             passwordTextField.replace(textRange, withText: passwordTextField.text!)
         }

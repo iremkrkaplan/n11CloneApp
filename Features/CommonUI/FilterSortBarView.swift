@@ -129,7 +129,6 @@ class FilterSortBarView: UIView {
         return stack
     }()
 
-    // MARK: - Initialization
 
     override init(frame: CGRect) {
         super.init(frame: frame)
