@@ -513,7 +513,7 @@ class ProductDetailViewController: UIViewController {
 
         specsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        let specTitles = ["Marka: Xiaomi", "Distribütör Garantili", "Ekran Boyutu 11.2\"", "Batarya Kapasitesi 8850 mAh", "Ön Kamera Çözünürlüğü 12 MP", "Şarj Tipi: USB-C", "Çözünürlük: 2560x1600"]
+        let specTitles = ["Marka: Apple", "Distribütör Garantili", "Ekran Boyutu 11.2\"", "Batarya Kapasitesi 8850 mAh", "Ön Kamera Çözünürlüğü 12 MP", "Şarj Tipi: USB-C", "Çözünürlük: 2560x1600"]
 
         for spec in specTitles {
             let badgeView = createSpecBadgeView(text: spec)
