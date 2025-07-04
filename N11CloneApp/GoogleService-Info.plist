@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAOFtSMmAX8tTXXJnS6mJ-bvt4_H0iioEw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>515052764612</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>iremkarakaplan.N11CloneApp</string>
+	<key>PROJECT_ID</key>
+	<string>n11cloneapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>n11cloneapp.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:515052764612:ios:06c6dc3b5ccb1adf1e7891</string>
+</dict>
+</plist>
