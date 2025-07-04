@@ -32,7 +32,7 @@ class ProductDetailViewController: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.isPagingEnabled = true
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .systemBackground
+        cv.backgroundColor = .white
         cv.register(ProductImageCell.self, forCellWithReuseIdentifier: ProductImageCell.identifier)
         cv.dataSource = self
         cv.delegate = self
@@ -62,7 +62,7 @@ class ProductDetailViewController: UIViewController {
     
     private let bottomActionBar: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 0, height: -2)
@@ -101,7 +101,7 @@ class ProductDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         setupNavigationBar()
         setupUI()
@@ -212,15 +212,21 @@ class ProductDetailViewController: UIViewController {
     }
     
     private func configureBottomPriceLabel(for product: Product) {
-        let finalPriceString = String(format: "%.2f TL", product.price ?? 0.0)
         let attributedText = NSMutableAttributedString()
 
         if let originalPrice = product.originalPrice, let currentPrice = product.price, originalPrice > currentPrice {
-            let oldPriceString = String(format: "%.2f TL", originalPrice)
+            // "SEPETTE" text
             let sepetText = NSAttributedString(
-                string: "SEPETTE\n",
-                attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor.systemGray]
+                string: "SEPETTE\n", // Explicit newline
+                attributes: [
+                    .font: UIFont.systemFont(ofSize: 12),
+                    .foregroundColor: UIColor.n11Purple
+                ]
             )
+            attributedText.append(sepetText)
+
+            // Old price (struck through)
+            let oldPriceString = String(format: "%.2f TL", originalPrice)
             let oldPriceAttributed = NSAttributedString(
                 string: oldPriceString,
                 attributes: [
@@ -229,18 +235,29 @@ class ProductDetailViewController: UIViewController {
                     .strikethroughStyle: NSUnderlineStyle.single.rawValue
                 ]
             )
-            attributedText.append(sepetText)
             attributedText.append(oldPriceAttributed)
+            
+            // Add an extra newline for clear separation
             attributedText.append(NSAttributedString(string: "\n"))
         }
-        
+
+        // Final price (larger and bold)
+        let finalPriceString = String(format: "%.2f TL", product.price ?? 0.0)
         let finalPriceAttributed = NSAttributedString(
             string: finalPriceString,
-            attributes: [.font: UIFont.systemFont(ofSize: 22, weight: .bold), .foregroundColor: UIColor.label]
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 22, weight: .bold),
+                .foregroundColor: UIColor.black
+            ]
         )
         attributedText.append(finalPriceAttributed)
-        
+
+        // Set the attributed text to the label
         priceInfoLabel.attributedText = attributedText
+        
+        // Crucially, ensure the label can display multiple lines
+        priceInfoLabel.numberOfLines = 0 // Allows for any number of lines
+        priceInfoLabel.lineBreakMode = .byWordWrapping // Ensures words break correctly
     }
 
     
