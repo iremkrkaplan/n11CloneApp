@@ -21,7 +21,7 @@ class NormalProductCell: UICollectionViewCell {
 
     let n11BadgeView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.3, green: 0.1, blue: 0.5, alpha: 1.0)
+        view.backgroundColor = UIColor.lightPurple
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class NormalProductCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "ÜCRETSİZ KARGO"
         label.font = .systemFont(ofSize: 10, weight: .medium)
-        label.textColor = UIColor(red: 0.3, green: 0.1, blue: 0.5, alpha: 1.0)
+        label.textColor = UIColor.lightPurple
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isHidden = true
         return label
@@ -104,13 +104,13 @@ class NormalProductCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         let arrowImageView = UIImageView(image: UIImage(systemName: "arrow.down"))
-        arrowImageView.tintColor = UIColor(red: 0.3, green: 0.1, blue: 0.5, alpha: 1.0)
+        arrowImageView.tintColor = UIColor.lightPurple
         arrowImageView.translatesAutoresizingMaskIntoConstraints = false
 
         let label = UILabel()
         label.text = "30 günün en düşük fiyatı!"
         label.font = .systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = UIColor(red: 0.3, green: 0.1, blue: 0.5, alpha: 1.0)
+        label.textColor = UIColor.lightPurple
         label.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(arrowImageView)
@@ -143,7 +143,7 @@ class NormalProductCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "SEPETTE"
         label.font = .systemFont(ofSize: 10, weight: .regular)
-        label.textColor = UIColor(red: 0.3, green: 0.1, blue: 0.5, alpha: 1.0)
+        label.textColor = UIColor.lightPurple
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isHidden = true
         return label
@@ -164,7 +164,7 @@ class NormalProductCell: UICollectionViewCell {
         button.backgroundColor = .white
         button.layer.cornerRadius = 4
         button.layer.borderWidth = 1.5
-        button.layer.borderColor = UIColor(red: 0.3, green: 0.1, blue: 0.5, alpha: 1.0).cgColor
+        button.layer.borderColor = UIColor.lightPurple.cgColor
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

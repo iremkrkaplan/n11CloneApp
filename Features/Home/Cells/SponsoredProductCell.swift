@@ -58,7 +58,7 @@ class SponsoredProductCell: UICollectionViewCell {
         return label
     }()
     
-    private let priceStackView: UIStackView = {
+    private let priceContainerStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 6
@@ -88,6 +88,14 @@ class SponsoredProductCell: UICollectionViewCell {
         return stack
     }()
     
+    private let headerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Bu ürünleri gördünüz mü?"
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.textColor = .black
+        return label
+    }()
+    
     private let extraDiscountLabel: UILabel = {
         let label = UILabel()
         let boltImage = UIImage(systemName: "bolt.fill")
@@ -97,7 +105,7 @@ class SponsoredProductCell: UICollectionViewCell {
         let attributedString = NSMutableAttributedString(attachment: attachment)
         attributedString.append(NSAttributedString(string: " Sepette Ek İndirim", attributes: [
             .font: UIFont.systemFont(ofSize: 12, weight: .medium),
-            .foregroundColor: UIColor.systemBlue
+            .foregroundColor: UIColor.n11Purple
         ]))
         
         label.attributedText = attributedString
@@ -108,10 +116,18 @@ class SponsoredProductCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Ücretsiz Kargo"
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .darkGray
+        label.textColor = .lightPurple
         return label
     }()
-
+    // <-- NEW: Vertical stack for just the prices -->
+    private let verticalPriceStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical // Fiyatları alt alta sıralayacak
+        stack.spacing = 2 // Eski ve yeni fiyat arasında küçük boşluk
+        stack.alignment = .leading // Fiyatları sola hizalayacak
+        return stack
+    }()
+    
     private let infoStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -143,23 +159,36 @@ class SponsoredProductCell: UICollectionViewCell {
         layer.cornerRadius = 8
         layer.masksToBounds = true
         
-        priceStackView.addArrangedSubview(discountBadge)
-        priceStackView.addArrangedSubview(oldPriceLabel)
-        priceStackView.addArrangedSubview(priceLabel)
+        priceContainerStackView.addArrangedSubview(discountBadge)
+        priceContainerStackView.addArrangedSubview(oldPriceLabel)
+        priceContainerStackView.addArrangedSubview(priceLabel)
+        priceContainerStackView.addArrangedSubview(verticalPriceStackView)
         
         fullRatingStackView.addArrangedSubview(ratingStackView)
         fullRatingStackView.addArrangedSubview(ratingCountLabel)
         
+        infoStackView.addArrangedSubview(headerLabel)
         infoStackView.addArrangedSubview(titleLabel)
-        infoStackView.addArrangedSubview(priceStackView)
+        infoStackView.addArrangedSubview(priceContainerStackView)
         infoStackView.addArrangedSubview(extraDiscountLabel)
         infoStackView.addArrangedSubview(fullRatingStackView)
         infoStackView.addArrangedSubview(freeShippingLabel)
         
         mainStackView.addArrangedSubview(imageView)
         mainStackView.addArrangedSubview(infoStackView)
+        verticalPriceStackView.addArrangedSubview(oldPriceLabel)
+        verticalPriceStackView.addArrangedSubview(priceLabel)
         
         contentView.addSubview(mainStackView)
+        
+        if let badgeLabel = discountBadge.viewWithTag(1) as? UILabel {
+            badgeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+            badgeLabel.setContentHuggingPriority(.required, for: .horizontal)
+        }
+       oldPriceLabel.setContentHuggingPriority(.required, for: .vertical)
+       oldPriceLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+       priceLabel.setContentHuggingPriority(.required, for: .vertical)
+       priceLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),

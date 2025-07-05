@@ -44,7 +44,7 @@ class HomeCollectionViewLayout {
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
 
         let groupWidth = environment.container.contentSize.width * 0.9
-        let groupHeight: CGFloat = 220
+        let groupHeight: CGFloat = 180
         let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(groupWidth),
                                                heightDimension: .absolute(groupHeight))
 
