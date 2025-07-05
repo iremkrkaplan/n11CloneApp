@@ -160,6 +160,8 @@ class AuthPopupViewController: UIViewController {
             textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor.lightGray])
         }
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textField.autocapitalizationType = .none
+        textField.textColor = Colors.darkGrayText
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -176,6 +178,7 @@ class AuthPopupViewController: UIViewController {
         textField.layer.borderColor = Colors.lightGrayBorder.cgColor
         textField.layer.borderWidth = 1
         textField.clipsToBounds = true
+        textField.textColor = Colors.darkGrayText
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Padding.standard, height: textField.frame.height))
         textField.leftViewMode = .always
          if let placeholder = textField.placeholder {
@@ -194,6 +197,7 @@ class AuthPopupViewController: UIViewController {
         textField.layer.borderColor = Colors.lightGrayBorder.cgColor
         textField.layer.borderWidth = 1
         textField.clipsToBounds = true
+        textField.textColor = Colors.darkGrayText
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Padding.standard, height: textField.frame.height))
         textField.leftViewMode = .always
         if let placeholder = textField.placeholder {
@@ -212,6 +216,7 @@ class AuthPopupViewController: UIViewController {
         textField.layer.cornerRadius = 8
         textField.layer.borderColor = Colors.lightGrayBorder.cgColor
         textField.layer.borderWidth = 1
+        textField.textColor = Colors.darkGrayText
         textField.clipsToBounds = true
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Padding.standard, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -264,9 +269,9 @@ class AuthPopupViewController: UIViewController {
         stack.distribution = .fillEqually
         stack.spacing = Padding.small
         stack.translatesAutoresizingMaskIntoConstraints = false
-        let appleButton = createSocialButton(title: "Apple", iconName: "applelogo")
-        let facebookButton = createSocialButton(title: "Facebook", iconName: "hand.thumbsup.circle.fill")
-        let googleButton = createSocialButton(title: "Google", iconName: "g.circle.fill")
+        let appleButton = createSocialButton(title: "Apple", iconName: "iconApple")
+        let facebookButton = createSocialButton(title: "Facebook", iconName: "iconFacebook")
+        let googleButton = createSocialButton(title: "Google", iconName: "iconGoogle")
 
         stack.addArrangedSubview(appleButton)
         stack.addArrangedSubview(facebookButton)
