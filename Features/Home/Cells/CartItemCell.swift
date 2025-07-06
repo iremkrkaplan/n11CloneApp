@@ -146,7 +146,7 @@ class CartItemCell: UITableViewCell {
         
         if let urlString = cartItem.imageUrl, let url = URL(string: urlString) {
             productImageView.kf.indicatorType = .activity
-            productImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo"))
+            productImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeHolder"))
         } else {
             productImageView.image = UIImage(systemName: "photo")
         }
