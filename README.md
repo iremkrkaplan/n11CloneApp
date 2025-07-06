@@ -16,7 +16,7 @@ This project is a study developed to advance my mobile development skills and de
 
 Below is a list of the main features that have been made functional as a result of the project's development process:
 
-*   **Full Programmatic UI:** All core screens of the application (Login/Register, Home, Categories, My Lists, My Account, Product Detail) have been created using code, and Auto Layout constraints have been managed programmatically.
+*   **Full Programmatic UI:** All core screens of the application (Login/Register, Home, Categories, Cart, My Lists, My Account, Product Detail) have been created using code, and Auto Layout constraints have been managed programmatically.
 
 *   **Modular Folder Structure:** Application layers and feature areas are organized into clearly separated folders.
 
