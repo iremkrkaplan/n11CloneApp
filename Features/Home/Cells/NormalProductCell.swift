@@ -277,11 +277,11 @@ class NormalProductCell: UICollectionViewCell {
 
         if let urlString = product.primaryImageURL, let url = URL(string: urlString) {
             imageView.kf.indicatorType = .activity
-            imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "photo"))
+            imageView.kf.setImage(with: url, placeholder: UIImage(named: "placeHolder"))
         } else {
             imageView.image = UIImage(systemName: "photo")
         }
-
+        
         freeShippingLabel.isHidden = !(product.isFreeShipping ?? false)
         n11BadgeView.isHidden = !(product.hasN11Badge ?? false)
         priceReductionBannerView.isHidden = !(product.hasPriceReductionBadge ?? false)
