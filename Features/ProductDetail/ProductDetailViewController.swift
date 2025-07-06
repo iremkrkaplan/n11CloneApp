@@ -5,6 +5,7 @@ class ProductDetailViewController: UIViewController {
 
     var product: Product?
     private var currentImageIndex = 0
+    private let cartManager = CartManager.shared
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -656,11 +657,43 @@ class ProductDetailViewController: UIViewController {
             }
         }
     }
-
+    
     @objc private func addToCartButtonTapped() {
-        let alert = UIAlertController(title: "Sepete Eklendi", message: "Ürün sepetinize eklendi.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
-        present(alert, animated: true)
+        guard let product = self.product else {
+            print("Error: Cannot add to cart, product data is nil.")
+            let alert = UIAlertController(title: "Hata", message: "Ürün bilgisi alınamadı. Sepete eklenemiyor.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            return
+        }
+        let quantityToAdd = 1
+        cartManager.addToCart(product: product, quantity: quantityToAdd) { [weak self] result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            print("Product '\(product.title)' added to cart successfully.")
+                            let alert = UIAlertController(title: "Sepete Eklendi", message: "\(product.title) ürün sepetinize eklendi.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+                            self?.present(alert, animated: true)
+                            self?.animateAddToCartButton()
+                        case .failure(let error):
+                            print("Error adding product '\(product.title)' to cart: \(error.localizedDescription)")
+                            let alert = UIAlertController(title: "Hata", message: "Ürün sepete eklenirken bir sorun oluştu: \(error.localizedDescription)", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+                            self?.present(alert, animated: true)
+                        }
+                    }
+                }
+    }
+    
+    private func animateAddToCartButton() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.addToCartButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.addToCartButton.transform = CGAffineTransform.identity
+            }
+        }
     }
 
     @objc private func backButtonTapped() {
