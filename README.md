@@ -41,6 +41,13 @@ Below is a list of the main features that have been made functional as a result 
     *   The logic for adding or removing a product from favorites on the product detail screen has been linked with Firestore (add/status check functionality).
     *   On the My Lists screen, the user's favorited products are listed by fetching them from Firestore in real-time.
 
+*   **Firebase Firestore Integration (Cart Management):**
+    *   A Firebase Firestore-based cart system has been implemented.
+    *   Users can add or remove products from their cart directly from the Product Detail screen.
+    *   Cart data is stored per user in Firestore, providing persistence across sessions.
+    *   The Cart screen displays a real-time list of products currently in the user's cart.
+    *   Quantity and price details are shown, and Firestore updates reflect changes instantly in the UI.
+
 *   **Kingfisher Integration:** The Kingfisher library has been included in the project to asynchronously and efficiently load product images from URLs and has been used for image loading operations.
 
 ## Technologies Used
@@ -59,11 +66,14 @@ The project is built on the following modular structure:
 ├── Core
 │   ├── Firebase
 │   │   ├── FavoritesManager.swift
+│   │   ├── CartManager.swift
 │   │   └── FirebaseManager.swift
 │   ├── Models
 │   │   └── Product.swift
+│   │   ├── CartItem.swift
 │   ├── Networking
 │   │   └── APIService.swift
+│   │   └── MockData.swift
 │   └── Utilities
 │       └── ColorConstants.swift
 ├── Features
